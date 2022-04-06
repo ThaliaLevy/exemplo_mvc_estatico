@@ -27,7 +27,15 @@ public class principal {
 				break;
 			}
 			case 2: {
-
+				//vc.localizar
+				break;
+			}
+			case 3: {
+				//vc.atualizar
+				break;
+			}
+			case 4: {
+				//vc.deletar
 				break;
 			}
 			case 0: {

@@ -1,5 +1,7 @@
 package control;
 
+import model.MCarro;
+
 public class Carro {
 
 	private String nome;
@@ -16,6 +18,13 @@ public class Carro {
 		this.placa = placa;
 		this.marca = marca;
 		this.ano = ano;
+	}
+	
+	public boolean tratarDados() {
+		MCarro mc = new MCarro();
+		mc.create(this);
+		
+		return true;
 	}
 
 	public String getNome() {

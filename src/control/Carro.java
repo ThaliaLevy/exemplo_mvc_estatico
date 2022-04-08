@@ -3,7 +3,6 @@ package control;
 import model.MCarro;
 
 public class Carro {
-
 	private String nome;
 	private String placa;
 	private String marca;
@@ -22,9 +21,11 @@ public class Carro {
 	
 	public boolean tratarDados() {
 		MCarro mc = new MCarro();
-		mc.create(this);
-		
-		return true;
+		if(mc.create(this) == true) {
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public String getNome() {

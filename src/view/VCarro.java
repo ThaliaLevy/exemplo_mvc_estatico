@@ -7,21 +7,30 @@ import control.Carro;
 public class VCarro {
 
 	public void receberInformacoes(Scanner ler) {
-		System.out.println("Digite: \nNome: ");
-		String nome = ler.nextLine();
+		System.out.println("INFORMAÇÕES PARA CADASTRO \n------------------------- ");
+		System.out.println("Nome: ");
+		String nome = ler.next();
 		System.out.println("Marca: ");
-		String marca = ler.nextLine();
+		String marca = ler.next();
 		System.out.println("Placa: ");
-		String placa = ler.nextLine();
+		String placa = ler.next();
 		System.out.println("Ano: ");
 		int ano = ler.nextInt();
+		
+		//converter somente para validar se está vazio
+		String anoString = String.valueOf(ano);
 
-		Carro c = new Carro(nome, placa, marca, ano);
-
-		if (c.tratarDados() == true) {
-			System.out.println("Cadastro realizado!");
+		if (nome.isEmpty() || marca.isEmpty() || placa.isEmpty() || anoString.isEmpty()) {
+			System.out.println("Dados devem estar preenchidos!");
 		} else {
-			System.out.println("Erro ao cadastrar.");
+			Carro c = new Carro(nome, placa, marca, ano);
+
+			if (c.tratarDados() == true) {
+				System.out.println("Cadastro realizado!");
+			} else {
+				System.out.println("Erro ao cadastrar.");
+			}
 		}
+
 	}
 }

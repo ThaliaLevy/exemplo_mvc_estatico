@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.SQLException;
+
 import control.Carro;
 
 public class MCarro {
@@ -10,10 +12,35 @@ public class MCarro {
 	}
 
 	public boolean create(Carro c) {
-		//preparar sql, abrir conexão e executar o sql
-		//fazer um if pra retornar true somente se der certo. esse bool sera usado para 
-		//comunicar as outras classes corretamente
-		return true;
+		try {
+			Conexao cn = new Conexao();
+			cn.sql = "create database if not exists BDCarro";
+			cn.ps = cn.conn.prepareStatement(cn.sql);
+			cn.ps.execute();
+
+			cn.sql = "use BDCarro";
+			cn.ps = cn.conn.prepareStatement(cn.sql);
+			cn.ps.execute();
+			
+			cn.sql = "create table if not exists Carro(id int auto_increment primary key, nome varchar(20), placa varchar(20), marca varchar(20), ano int);";
+			cn.ps = cn.conn.prepareStatement(cn.sql);
+			cn.ps.execute();
+
+			cn.sql = "insert into Carro(nome, placa, marca, ano) values(?, ?, ?, ?)";
+			cn.ps = cn.conn.prepareStatement(cn.sql);
+			cn.ps.setString(1, c.getNome());
+			cn.ps.setString(2, c.getPlaca());
+			cn.ps.setString(3, c.getMarca());
+			cn.ps.setInt(4, c.getAno());
+			cn.ps.execute();
+
+			cn.conn.close();
+			return true;
+		} catch (SQLException e) {
+			System.out.println(e);
+			return false;
+		}
+
 	}
 
 	public boolean read() {
